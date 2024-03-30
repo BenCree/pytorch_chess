@@ -9,3 +9,5 @@
 5. search tree with some known method something something monte carlo
 6. ???
 7. win chess
+
+maybe score each state with an engine and train model to predict score, then pick best scoring move
