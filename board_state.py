@@ -67,5 +67,3 @@ class state():
         # print(f'castling array {castling_array}')
         # print(f'fen array {fen_array}')
         return full_array
-
-        return state_array
