@@ -1,4 +1,4 @@
-# Chess Engine in PyTorch
+# (silly) Chess Engine in PyTorch
 ## Plan
 
 1. get training data from public database in parsable format
@@ -10,4 +10,7 @@
 6. ???
 7. win chess
 
-maybe score each state with an engine and train model to predict score, then pick best scoring move
+maybe score each state with an engine and train model to predict score, then pick best scoring move.
+learning result from gamestates isn't a good idea e.g. blunder early on but still won, 
+has no measure of how good an individual state is, just that it eventually ended up winning, 
+but will set up infrastructure for more complicated things.
