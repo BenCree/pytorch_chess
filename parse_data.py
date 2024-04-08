@@ -27,7 +27,7 @@ def read_data(data, game_num=5):
             curr_game += 1
 
             res = game.headers['Result']
-            res_array = np.array(res_dict[res])
+            res_value = res_dict[res]
             board = game.board()
             length = game.headers['PlyCount']
             #print(f'game length: {length}')
@@ -41,29 +41,30 @@ def read_data(data, game_num=5):
 
 
                 states.append(board_array)
-
+                y.append(res_value)
                 board.push(move)
 
             assert int(game.headers['PlyCount']) == len(states)
             states = torch.Tensor(states)
             #print(len(states), states)
             games.append(states)
-            y.append(res_array)
+            y.append(res_value)
             print(f'parsed game {curr_game}, {len(states)} moves')
             if curr_game > game_num:
                 break
-        print(games)
+        #print(games)
 
-        y = np.array(y)
-        y = torch.tensor(y)
-        return games, y
+        y_tensor = torch.tensor(y, dtype=torch.float32)
+        return states, y_tensor
 
 
 
 if __name__ == '__main__':
     data = ['ficsgamesdb_2023_standard2000_nomovetimes_330240.pgn']
-    games, res = read_data(data, 1000)
-    print(games[0], res[0])
+    n = 100
+    games, res = read_data(data, n)
+    print(games[0:2], res[0:2])
+    np.savez(f'{n}_training_data.npz', games, res)
 
 #
 # while True:
